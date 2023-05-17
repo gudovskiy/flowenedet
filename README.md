@@ -1,16 +1,16 @@
 ## Concurrent Misclassification and Out-of-Distribution Detection for Semantic Segmentation via Energy-Based Normalizing Flow
-UAI 2023 preprint:[https://arxiv.org/abs/????.?????](https://arxiv.org/abs/????.?????)
+UAI 2023 preprint:[https://arxiv.org/abs/2305.09610](https://arxiv.org/abs/2305.09610)
 
 ## Abstract
 Recent semantic segmentation models accurately classify test-time examples that are similar to a training dataset distribution. However, their discriminative closed-set approach is not robust in practical data setups with distributional shifts and out-of-distribution (OOD) classes. As a result, the predicted probabilities can be very imprecise when used as confidence scores at test time. To address this, we propose a generative model for concurrent in-distribution misclassification (IDM) and OOD detection that relies on a normalizing flow framework. The proposed flow-based detector with an energy-based inputs (FlowEneDet) can extend previously deployed segmentation models without their time-consuming retraining. Our FlowEneDet results in a low-complexity architecture with marginal increase in the memory footprint. FlowEneDet achieves promising results on Cityscapes, Cityscapes-C, FishyScapes and SegmentMeIfYouCan benchmarks in IDM/OOD detection when applied to pretrained DeepLabV3+ and SegFormer semantic segmentation models.
 
 ## BibTex Citation
-If you like our [paper](https://arxiv.org/abs/????.?????) or code, please cite it using the following BibTex:
+If you like our [paper](https://arxiv.org/abs/2305.09610) or code, please cite it using the following BibTex:
 ```
 @article{flowenedet,
 	author    = {Denis Gudovskiy and Tomoyuki Okuno and Yohei Nakata},
 	title     = {Concurrent Misclassification and Out-of-Distribution Detection for Semantic Segmentation via Energy-Based Normalizing Flow},
-	journal   = {arXiv:????.?????},
+	journal   = {arXiv:2305.09610},
 	year      = {2023},
 }
 ```
