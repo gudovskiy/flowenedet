@@ -1,5 +1,5 @@
 ## Concurrent Misclassification and Out-of-Distribution Detection for Semantic Segmentation via Energy-Based Normalizing Flow
-UAI 2023 preprint:[https://arxiv.org/abs/2305.09610](https://arxiv.org/abs/2305.09610)
+UAI 2023 preprint: [https://arxiv.org/abs/2305.09610](https://arxiv.org/abs/2305.09610)
 
 ## Abstract
 Recent semantic segmentation models accurately classify test-time examples that are similar to a training dataset distribution. However, their discriminative closed-set approach is not robust in practical data setups with distributional shifts and out-of-distribution (OOD) classes. As a result, the predicted probabilities can be very imprecise when used as confidence scores at test time. To address this, we propose a generative model for concurrent in-distribution misclassification (IDM) and OOD detection that relies on a normalizing flow framework. The proposed flow-based detector with an energy-based inputs (FlowEneDet) can extend previously deployed segmentation models without their time-consuming retraining. Our FlowEneDet results in a low-complexity architecture with marginal increase in the memory footprint. FlowEneDet achieves promising results on Cityscapes, Cityscapes-C, FishyScapes and SegmentMeIfYouCan benchmarks in IDM/OOD detection when applied to pretrained DeepLabV3+ and SegFormer semantic segmentation models.
@@ -41,6 +41,7 @@ curl -o checkpoints/segformer_b2_BASE.pth https://download.openmmlab.com/mmsegme
 
 ## Task Models and Datasets
 - Folder ./local_configs contains all configuration files for task models used in our experiments: DeepLabV3+ with ResNet-101 backbone and SegFormer-B2. Any other model can be extended in a similar way.
+- Files ./mmseg/models ./decode_heads/flow_decode_head.py and ./losses/flow_loss.py implement out model.
 - Cityscapes-C is implemented using the imagecorruptions library functions: we add dict(type='Corruptions', mode='test') line to a test_pipeline in each configuration file, except for the original BASE models. The folder ./mmseg/datasets/pipelines/transforms.py contains the actual implementation.
 
 ## Training FlowEneDet Detectors
@@ -70,17 +71,18 @@ CUDA_VISIBLE_DEVICES=0, python tools/test.py local_configs/segformer/segformer.b
 
 ## IDM/OOD Evaluations on Cityscapes and Cityscapes-C
 - Cityscapes and Cityscapes-C results can be reproduced by selecting a configuration file (MSP, MLG, ENE, MCD, FEDU, FEDC postfix) and a corresponding checkpoint file
+- Test dataset should be set to *test_dataset = 'CS'* in the corresponding *local_configs/_base_/datasets* data configuration file
 - Cityscapes-C image corruptions are set by a corruption severity level (1-4) and a corruption type (brightness, motion_blur, snow or others from transforms.py), otherwise the original Cityscapes validation dataset is used
 - The examples below should reproduce our reference quantitative results (corrupted results should be averaged accoding to our evaluation protocol, which is implemented in parse_results.py script)
 - Evaluation metrics for Cityscapes and Cityscapes-C can be selected by appending either closed-set *--eval mIoU* or open-set *--eval oIoU* argument
 ```
-CUDA_VISIBLE_DEVICES=0, python tools/test.py local_configs/segformer/segformer.b2.1024x1024.cityf.MSP.py  checkpoints/segformer_b2_BASE.pth --oIoU
-CUDA_VISIBLE_DEVICES=0, python tools/test.py local_configs/segformer/segformer.b2.1024x1024.cityf.ENE.py  checkpoints/segformer_b2_BASE.pth --oIoU
-CUDA_VISIBLE_DEVICES=0, python tools/test.py local_configs/segformer/segformer.b2.1024x1024.cityf.MCD.py  checkpoints/segformer_b2_BASE.pth --oIoU
-CUDA_VISIBLE_DEVICES=0, python tools/test.py local_configs/segformer/segformer.b2.1024x1024.cityf.SML.py  checkpoints/segformer_b2_BASE.pth --oIoU
-CUDA_VISIBLE_DEVICES=0, python tools/test.py local_configs/segformer/segformer.b2.1024x1024.cityf.FEDU.py checkpoints/segformer_b2_FEDU.pth --oIoU
-CUDA_VISIBLE_DEVICES=0, python tools/test.py local_configs/segformer/segformer.b2.1024x1024.cityf.FEDC.py checkpoints/segformer_b2_FEDC.pth --oIoU
-CUDA_VISIBLE_DEVICES=0, python tools/test.py local_configs/segformer/segformer.b2.1024x1024.cityf.FEDC.py checkpoints/segformer_b2_FEDC.pth --oIoU --corrupt-sev 1 --corrupt-typ snow
+CUDA_VISIBLE_DEVICES=0, python tools/test.py local_configs/segformer/segformer.b2.1024x1024.cityf.MSP.py  checkpoints/segformer_b2_BASE.pth --eval oIoU
+CUDA_VISIBLE_DEVICES=0, python tools/test.py local_configs/segformer/segformer.b2.1024x1024.cityf.ENE.py  checkpoints/segformer_b2_BASE.pth --eval oIoU
+CUDA_VISIBLE_DEVICES=0, python tools/test.py local_configs/segformer/segformer.b2.1024x1024.cityf.MCD.py  checkpoints/segformer_b2_BASE.pth --eval oIoU
+CUDA_VISIBLE_DEVICES=0, python tools/test.py local_configs/segformer/segformer.b2.1024x1024.cityf.SML.py  checkpoints/segformer_b2_BASE.pth --eval oIoU
+CUDA_VISIBLE_DEVICES=0, python tools/test.py local_configs/segformer/segformer.b2.1024x1024.cityf.FEDU.py checkpoints/segformer_b2_FEDU.pth --eval oIoU
+CUDA_VISIBLE_DEVICES=0, python tools/test.py local_configs/segformer/segformer.b2.1024x1024.cityf.FEDC.py checkpoints/segformer_b2_FEDC.pth --eval oIoU
+CUDA_VISIBLE_DEVICES=0, python tools/test.py local_configs/segformer/segformer.b2.1024x1024.cityf.FEDC.py checkpoints/segformer_b2_FEDC.pth --eval oIoU --corrupt-sev 1 --corrupt-typ snow
 ```
 
 ## FlowEneDet Architecture

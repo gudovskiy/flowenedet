@@ -1,0 +1,10 @@
+matplotlib
+mmcls>=0.20.1
+numpy
+packaging
+prettytable
+scikit-learn
+terminaltables
+ipython
+attrs
+timm==0.4.12
