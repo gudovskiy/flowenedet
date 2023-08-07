@@ -7,11 +7,12 @@ Recent semantic segmentation models accurately classify test-time examples that 
 ## BibTex Citation
 If you like our [paper](https://arxiv.org/abs/2305.09610) or code, please cite it using the following BibTex:
 ```
-@article{flowenedet,
-	author    = {Denis Gudovskiy and Tomoyuki Okuno and Yohei Nakata},
-	title     = {Concurrent Misclassification and Out-of-Distribution Detection for Semantic Segmentation via Energy-Based Normalizing Flow},
-	journal   = {arXiv:2305.09610},
-	year      = {2023},
+@InProceedings{flowenedet,
+  title = 	 {Concurrent Misclassification and Out-of-Distribution Detection for Semantic Segmentation via Energy-Based Normalizing Flow},
+  author =       {Gudovskiy, Denis and Okuno, Tomoyuki and Nakata, Yohei},
+  booktitle = 	 {Proceedings of the Thirty-Ninth Conference on Uncertainty in Artificial Intelligence},
+  year = 	 {2023},
+  url = 	 {https://proceedings.mlr.press/v216/gudovskiy23a.html},
 }
 ```
 
