@@ -1,3 +1,6 @@
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/concurrent-misclassification-and-out-of/anomaly-detection-on-fishyscapes-l-f)](https://paperswithcode.com/sota/anomaly-detection-on-fishyscapes-l-f?p=concurrent-misclassification-and-out-of)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/concurrent-misclassification-and-out-of/anomaly-detection-on-fishyscapes-1)](https://paperswithcode.com/sota/anomaly-detection-on-fishyscapes-1?p=concurrent-misclassification-and-out-of)
+
 ## Concurrent Misclassification and Out-of-Distribution Detection for Semantic Segmentation via Energy-Based Normalizing Flow
 UAI 2023 preprint: [https://arxiv.org/abs/2305.09610](https://arxiv.org/abs/2305.09610)
 
